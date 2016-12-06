@@ -1,4 +1,4 @@
-package com.sketchpad.controllers;
+package com.sketchpad.controllers.rest;
 
 import com.sketchpad.domain.Sketch;
 import com.sketchpad.services.SketchService;
@@ -11,37 +11,37 @@ import java.util.Collection;
  * @author Perestoronin Daniil
  */
 @RestController
-@RequestMapping("/scetch")
-public class SketchController {
+@RequestMapping("/sketch")
+public class SketchRestController {
 
     @Autowired
     SketchService sketchService;
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @GetMapping("/all")
     @ResponseBody
     public Collection<Sketch> getAllSketches(){
         return sketchService.getAllSketches();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping("/{id}")
     @ResponseBody
     public Sketch getSketchById(@PathVariable Long id){
         return sketchService.getSketchById(id);
     }
 
-    @RequestMapping(value="/", method = RequestMethod.POST)
+    @PostMapping("/")
     @ResponseBody
     public Sketch createSketch(@RequestBody Sketch sketch){
         return sketchService.createSketch(sketch);
     }
 
-    @RequestMapping(value = "/{id}", method=RequestMethod.PUT)
+    @PutMapping("/{id}")
     @ResponseBody
     public void updateSketchById(@PathVariable Long id, @RequestBody Sketch sketch){
         sketchService.updateSketch(sketch);
     }
 
-    @RequestMapping(value = "/{id}", method=RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     @ResponseBody
     public void deleteSketch(@PathVariable Long id){
         sketchService.deleteSketch(id);
