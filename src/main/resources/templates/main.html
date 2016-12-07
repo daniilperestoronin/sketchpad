@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>SketchPad</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -8,6 +8,7 @@
     <script src="///netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" th:src="@{/sketchApp.js}"/>
 </head>
 <body>
 
@@ -15,15 +16,16 @@
     <h1>SketchPad</h1>
 </div>
 
-<div class="container">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <h3>Test sketch name</h3>
+<div class="container" ng-app="sketchApp" ng-controller="sketchesCtrl">
+    <div class="panel panel-default" ng-repeat="sketch in sketches">
+        <div class="panel-body" ng-click="myFunction(this)">
+            <h3>{{sketch.name}}</h3>
             <span class="badge">#testTag2</span>
-            <p>Test sketch text</p>
+            <p>{{sketch.text}}</p>
         </div>
     </div>
 </div>
+
 </body>
 </html>
 
