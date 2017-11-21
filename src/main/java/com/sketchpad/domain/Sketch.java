@@ -1,25 +1,25 @@
 package com.sketchpad.domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Objects;
 
 /**
  * @author Perestoronin Daniil
  */
+@Entity
+@Table(name = "sketch")
 public class Sketch implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "name")
     private String name;
-    private Collection<String> tags;
+    @Column(name = "text")
     private String text;
 
     public Sketch() {
-    }
-
-    public Sketch(Long id, String name, Collection<String> tags, String text) {
-        this.id = id;
-        this.name = name;
-        this.tags = tags;
-        this.text = text;
     }
 
     public Long getId() {
@@ -40,15 +40,6 @@ public class Sketch implements Serializable{
         return this;
     }
 
-    public Collection<String> getTags() {
-        return tags;
-    }
-
-    public Sketch setTags(Collection<String> tags) {
-        this.tags = tags;
-        return this;
-    }
-
     public String getText() {
         return text;
     }
@@ -56,5 +47,20 @@ public class Sketch implements Serializable{
     public Sketch setText(String text) {
         this.text = text;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sketch sketch = (Sketch) o;
+        return Objects.equals(id, sketch.id) &&
+                Objects.equals(name, sketch.name) &&
+                Objects.equals(text, sketch.text);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, text);
     }
 }
